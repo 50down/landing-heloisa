@@ -16,7 +16,6 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-
     fbq('init', '1125395379392398');
     fbq('track', 'PageView');
   </script>
@@ -206,6 +205,38 @@
       0% { transform: scale(1); }
       100% { transform: scale(1.1); }
     }
+
+    .status-localizacao {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .status-online {
+      display: inline-flex;
+      align-items: center;
+      background-color: #d4f8d4;
+      color: #2e7d32;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 16px;
+      margin-bottom: 5px;
+      gap: 8px;
+    }
+
+    .bolinha {
+      width: 10px;
+      height: 10px;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .localizacao {
+      font-size: 14px;
+      color: #555;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
@@ -216,7 +247,14 @@
       <img alt="Foto da Heloisa" class="profile-image" src="img/heloisa.jpg" />
     </div>
 
-    <div class="texto-online"><span>ONLINE AGORA</span></div>
+    <!-- Bloco de status e localização -->
+    <div class="status-localizacao">
+      <div class="status-online">
+        <span class="bolinha"></span>
+        <span>online</span>
+      </div>
+      <div class="localizacao">📍 Detectando sua cidade...</div>
+    </div>
 
     <h1>
       VENHA VISITAR A PROF HELOISA!<br />
@@ -253,5 +291,28 @@
       </div>
     </div>
   </div>
+
+  <!-- GEOLOCALIZAÇÃO -->
+  <script>
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+          .then(response => response.json())
+          .then(data => {
+            const cidade = data.address.city || data.address.town || data.address.village || 'sua cidade';
+            const estado = data.address.state || '';
+            document.querySelector(".localizacao").innerHTML = `📍 Moramos em <strong>${cidade}, ${estado}</strong>`;
+          })
+          .catch(() => {
+            document.querySelector(".localizacao").innerHTML = `📍 Não conseguimos detectar sua cidade 😢`;
+          });
+      });
+    } else {
+      document.querySelector(".localizacao").innerHTML = `📍 Geolocalização não suportada`;
+    }
+  </script>
 </body>
 </html>
