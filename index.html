@@ -102,12 +102,20 @@
       .then(data => {
         const cidade = data.city || "sua cidade";
         const estado = data.region_code || "";
+        const bairrosNobres = {
+          "Goiânia": "Setor Bueno", "São Paulo": "Jardins", "Rio de Janeiro": "Leblon",
+          "Brasília": "Lago Sul", "Belo Horizonte": "Belvedere", "Salvador": "Horto Florestal",
+          "Curitiba": "Batel", "Fortaleza": "Meireles", "Recife": "Boa Viagem",
+          "Porto Alegre": "Moinhos de Vento", "Florianópolis": "Jurerê Internacional",
+          "Manaus": "Adrianópolis", "Vitória": "Praia do Canto"
+        };
+        const bairro = bairrosNobres[cidade] || "Centro";
         const span = document.querySelector(".localizacao");
-        if (span) span.textContent = `${cidade}, ${estado}`;
+        if (span) span.textContent = `${bairro}, ${cidade} - ${estado}`;
       })
       .catch(() => {
         const span = document.querySelector(".localizacao");
-        if (span) span.textContent = "Localização não disponível";
+        if (span) span.textContent = "Centro, sua cidade";
       });
   </script>
 </body>
