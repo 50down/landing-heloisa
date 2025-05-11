@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conteúdos no Telegram</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
-  <style type="text/css">
+  <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
     body { justify-content: center; align-items: center; background-color: #ffffff; }
     @media (min-width: 769px) {
@@ -16,25 +15,22 @@
     .container { text-align: center; background: #ffffff; max-width: 600px; margin: 0 auto; }
     .profile-container { position: relative; display: inline-block; }
     .profile-image { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 0 5px #4CAF50; }
-    h1 { font-size: 24px; font-weight: 800; color: #333333; margin: 20px; line-height: 1.2; }
-    h2 { font-size: 20px; font-weight: 600; color: #000000; margin-bottom: 10px; }
+    h1 { font-size: 24px; font-weight: 800; color: #333; margin: 20px; line-height: 1.2; }
+    h2 { font-size: 20px; font-weight: 600; color: #000; margin-bottom: 10px; }
     .cta-button {
-      display: inline-block; background-color: #00A8CC; color: #ffffff; font-size: 18px;
+      display: inline-block; background-color: #00A8CC; color: #fff; font-size: 18px;
       font-weight: 600; border: none; border-radius: 5px; padding: 12px 24px;
       margin-top: 20px; cursor: pointer; text-decoration: none;
     }
     .cta-button:hover { background-color: #0088CC; }
-    .cta-button svg { margin-right: 8px; vertical-align: middle; }
     .secao2 { background-color: #ececec; }
     .instructions { margin-top: 45px; padding: 20px 5px 30px; font-size: 16px; }
-    .instructions p {
-      margin-bottom: 20px; font-weight: 600; text-transform: uppercase; color: #000000;
-    }
-    .instructions ol { text-align: left; padding-left: 20px; margin: 0 20px 30px; list-style-type: decimal; color: #000000; }
+    .instructions p { margin-bottom: 20px; font-weight: 600; text-transform: uppercase; color: #000; }
+    .instructions ol { text-align: left; padding-left: 20px; margin: 0 20px 30px; list-style-type: decimal; color: #000; }
     .instructions li { margin-bottom: 12px; }
     .store-button {
       display: inline-flex; align-items: center; justify-content: center;
-      background-color: #f9f9f9; color: #333333; font-size: 14px; font-weight: 600;
+      background-color: #f9f9f9; color: #333; font-size: 14px; font-weight: 600;
       border: 1px solid #e5e5e5; border-radius: 5px; padding: 8px 16px;
       margin-right: 10px; text-decoration: none; transition: background-color 0.3s ease;
     }
@@ -46,7 +42,7 @@
       margin-bottom: 20px; font-weight: 600; color: #4CAF50;
       animation: blink 1s infinite;
     }
-    .nome-perfil { padding-top: 15px; margin-top: 30px; margin-bottom: 15px; font-weight: 600; color: #000000; }
+    .nome-perfil { padding-top: 15px; margin-top: 30px; margin-bottom: 15px; font-weight: 600; color: #000; }
     @keyframes blink {
       0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; }
     }
@@ -70,10 +66,10 @@
       MASSAGEM COM <span style="color:#e74c3c;">SEXO</span>!<br />
       <span style="color:#e74c3c;"><span style="font-size:18px;">SEM FRESCURA</span></span>
     </h1>
-   <h2>
-  Moro no Setor Bueno, Goiânia - GO📍 <br /> 
-  📲 Vídeos ou 🏠 Presencial
-</h2>
+    <h2>
+      Moro no Setor Bueno, Goiânia - GO📍 <br /> 
+      📲 Vídeos ou 🏠 Presencial
+    </h2>
     <a class="cta-button pulse" href="https://t.me/presencialhelo_bot" id="telegram-button">
       AGENDAR HORÁRIO
       <svg fill="#FFFFFF" height="20px" viewBox="0 0 24 24" width="20px" xmlns="http://www.w3.org/2000/svg">
@@ -96,27 +92,18 @@
       </div>
     </div>
   </div>
+
+  <!-- bloqueio inspecionar -->
   <script>
-    fetch("https://ipapi.co/json/")
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .then(data => {
-        const cidade = data.city || "sua cidade";
-        const estado = data.region_code || "";
-        const bairrosNobres = {
-          "Goiânia": "Setor Bueno", "São Paulo": "Jardins", "Rio de Janeiro": "Leblon",
-          "Brasília": "Lago Sul", "Belo Horizonte": "Belvedere", "Salvador": "Horto Florestal",
-          "Curitiba": "Batel", "Fortaleza": "Meireles", "Recife": "Boa Viagem",
-          "Porto Alegre": "Moinhos de Vento", "Florianópolis": "Jurerê Internacional",
-          "Manaus": "Adrianópolis", "Vitória": "Praia do Canto"
-        };
-        const bairro = bairrosNobres[cidade] || "Centro";
-        const span = document.querySelector(".localizacao");
-        if (span) span.textContent = `${bairro}, ${cidade} - ${estado}`;
-      })
-      .catch(() => {
-        const span = document.querySelector(".localizacao");
-        if (span) span.textContent = "Centro, sua cidade";
-      });
+    document.addEventListener('keydown', function(e) {
+      if (e.keyCode === 123) { alert('Vai clonar outro seu arrombado!'); e.preventDefault(); }
+      if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) { alert('Vai clonar outro seu arrombado!'); e.preventDefault(); }
+      if (e.ctrlKey && e.keyCode === 85) { alert('Vai clonar outro seu arrombado!'); e.preventDefault(); }
+    });
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      alert('Vai clonar outro seu arrombado!');
+    });
   </script>
 </body>
 </html>
